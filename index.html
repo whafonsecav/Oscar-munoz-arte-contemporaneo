@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIENTO | Oscar Muñoz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- GSAP & Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Forzar scroll al inicio en cada carga -->
+    <script>history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
+</head>
+
+<body>
+
+    <!-- Overlay de Entrada -->
+    <div id="overlay">
+        <h1>Haz click para despertar la memoria</h1>
+    </div>
+
+    <!-- Fondo de Partículas (Three.js) -->
+    <div id="canvas-container"></div>
+
+    <!-- Navegación Flotante -->
+    <nav id="main-nav">
+        <div class="logo">ALIENTO</div>
+        <div class="menu-links">
+            <a href="#autor">Autor</a>
+            <a href="#obra">Obra</a>
+            <a href="#contexto">Contexto</a>
+        </div>
+    </nav>
+
+    <!-- HERO: Impacto Visual -->
+    <section id="hero">
+        <h1 class="hero-title animate-text">ALIENTO</h1>
+        <p class="hero-author animate-text delay-1">Oscar Muñoz</p>
+        <div class="scroll-indicator">↓ Conoce más</div>
+    </section>
+
+    <!-- SECCIÓN 1: EL ALQUIMISTA (Autor) -->
+    <section id="autor" class="infographic-section">
+        <div class="card glass-card">
+            <div class="card-content">
+                <h2 class="card-title">EL ALQUIMISTA DE LA IMAGEN</h2>
+                <h3 class="card-subtitle">Oscar Muñoz (Cali, 1951)</h3>
+                <p class="card-text">Un artista que no pinta con pintura, sino con agua, luz y vaho. Su obsesión:
+                    atrapar el instante antes de que todo desaparezca.</p>
+                <button class="btn-primary open-modal" data-modal="modal-autor">+ Conocer su Historia</button>
+            </div>
+            <div class="card-visual">
+                <img src="assets/img/autor_munoz.png" alt="Oscar Muñoz" class="visual-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: EL ESPEJO (Obra Interactiva) -->
+    <section id="obra" class="infographic-section reverse">
+        <div class="card glass-card col-layout">
+            <div class="card-content center-content">
+                <h2 class="card-title">TU ALIENTO CREA EL ARTE</h2>
+                <h3 class="card-subtitle">Una interacción vital</h3>
+                <p class="card-text">Acércate. Respira. Mira cómo la muerte retrocede por un instante gracias a tu vida.
+                </p>
+
+                <!-- 3 ESPEJOS SIMÉTRICOS -->
+                <div class="interactive-mirror-container">
+                    <div class="mirror-circle" data-image="assets/img/rostro_01.png">
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="mirror-circle" data-image="assets/img/rostro_02.png">
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="mirror-circle" data-image="assets/img/rostro_03.png">
+                        <div class="reflection"></div>
+                    </div>
+                </div>
+
+                <p class="interaction-hint">👆 Haz clic sobre los espejos para revelar el rostro.</p>
+                <button class="btn-primary open-modal" data-modal="modal-obra">+ Ver el Secreto Técnico</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2.5: VIDEO DOCUMENTAL -->
+    <section id="video-doc" class="infographic-section">
+        <div class="card glass-card col-layout">
+            <div class="video-section-header">
+                <h2 class="card-title center-text">LA OBRA EN ACCIÓN</h2>
+                <p class="video-intro">Registro de <em>Aliento</em> (1995) durante la retrospectiva <strong>Oscar Muñoz.
+                        <span class="glosario-word" data-word="protografias">Protografías</span></strong>, presentada en
+                    el País Vasco. El audio está en euskera — el reportaje fue
+                    emitido por la televisión pública vasca (ETB).</p>
+            </div>
+
+            <div class="video-wrapper">
+                <video controls preload="metadata" class="obra-video" poster="">
+                    <source src="assets/video/Oscar Muñoz - Aliento.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video HTML5.
+                </video>
+            </div>
+
+            <div class="video-desc-grid">
+                <div class="video-desc-item">
+                    <span class="vd-label">CONCEPTO</span>
+                    <p class="vd-text">8 espejos circulares de acero pulido colgados a la altura de la vista. A simple
+                        vista, parecen espejos ordinarios.</p>
+                </div>
+                <div class="video-desc-item">
+                    <span class="vd-label">INTERACCIÓN</span>
+                    <p class="vd-text">El espectador exhala su aliento. La humedad de la condensación revela
+                        momentáneamente el retrato oculto de una persona.</p>
+                </div>
+                <div class="video-desc-item">
+                    <span class="vd-label">SIGNIFICADO</span>
+                    <p class="vd-text">Las imágenes son fotografías de personas desaparecidas durante el conflicto
+                        armado
+                        en Colombia, tomadas de <span class="glosario-word" data-word="obituarios">obituarios</span>.
+                    </p>
+                </div>
+                <div class="video-desc-item">
+                    <span class="vd-label">SIMBOLISMO</span>
+                    <p class="vd-text">Dar «aliento» simboliza el recuerdo. La imagen desaparece cuando la humedad se
+                        evapora — fragilidad de la memoria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: CONTEXTO (Impacto) -->
+    <section id="contexto" class="infographic-section">
+        <div class="card glass-card col-layout">
+            <h2 class="card-title center-text">ROSTROS DEL OLVIDO</h2>
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <span class="stat-number">1995</span>
+                    <span class="stat-desc">Año de creación en una Colombia convulsa.</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">OBITUARIOS</span>
+                    <span class="stat-desc">El origen de las fotos: recuerdos desechados.</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">JUSTICIA</span>
+                    <span class="stat-desc">Rescatar al anónimo de la desaparición absoluta.</span>
+                </div>
+            </div>
+            <button class="btn-primary open-modal center-btn" data-modal="modal-contexto">+ Profundizar en el
+                Contexto</button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: TEORIA (Rediseñada) -->
+    <section id="teoria" class="infographic-section">
+        <div class="card glass-card col-layout teoria-card">
+            <div class="teoria-header">
+                <h2 class="card-title center-text">¿POR QUÉ ES ARTE CONTEMPORÁNEO?</h2>
+                <p class="teoria-intro">No por ser reciente, sino por romper con el modernismo. <em>Aliento</em> reúne
+                    los rasgos que tres pensadores fundamentales consideran definitorios del arte de nuestro tiempo.</p>
+            </div>
+
+            <div class="pilares-grid">
+                <!-- Pilar 1 -->
+                <div class="pilar-item">
+                    <div class="pilar-num">01</div>
+                    <div class="pilar-body">
+                        <h3 class="pilar-autor">Arthur Danto</h3>
+                        <p class="pilar-concepto">El Fin de la Historia del Arte</p>
+                        <p class="pilar-desc">En la era post-histórica, el arte se libera de la narrativa de progreso
+                            estilístico. <em>Aliento</em> usa materiales no artísticos —espejos industriales, grasa—
+                            para encarnar una reflexión filosófica sobre la existencia.</p>
+                    </div>
+                </div>
+                <!-- Pilar 2 -->
+                <div class="pilar-item">
+                    <div class="pilar-num">02</div>
+                    <div class="pilar-body">
+                        <h3 class="pilar-autor">Hans Belting</h3>
+                        <p class="pilar-concepto">Antropología de la Imagen</p>
+                        <p class="pilar-desc">La imagen no reside en el metal, sino en el acto de respirar del
+                            espectador. <em>Aliento</em> rompe la autonomía del objeto moderno: la obra solo existe si
+                            hay un cuerpo vivo interactuando.</p>
+                    </div>
+                </div>
+                <!-- Pilar 3 -->
+                <div class="pilar-item">
+                    <div class="pilar-num">03</div>
+                    <div class="pilar-body">
+                        <h3 class="pilar-autor">Terry Smith</h3>
+                        <p class="pilar-concepto">La Temporalidad Contemporánea</p>
+                        <p class="pilar-desc">Contemporáneo significa <em>con-tempus</em>: estar con el tiempo. La obra
+                            colapsa el pasado (la muerte), el presente (la respiración) y el futuro (la desaparición) en
+                            un solo instante interactivo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giro Sensorial -->
+            <div class="giro-sensorial-block">
+                <span class="gs-label">EL GIRO SENSORIAL</span>
+                <p class="gs-text">El arte deja de ser meramente visual para involucrar la totalidad de la experiencia
+                    corporal: la temperatura del metal, la humedad del aliento y la proximidad del rostro al espejo son
+                    elementos constitutivos de la obra. El cuerpo no es solo un tema — es la interfaz del conocimiento
+                    artístico.</p>
+            </div>
+
+            <button class="btn-primary open-modal center-btn" data-modal="modal-justificacion">+ Ver las 15
+                Características del Arte Contemporáneo en Aliento</button>
+        </div>
+    </section>
+
+    <!-- BIBLIOGRAFÍA -->
+    <footer id="referencias">
+        <p class="ref-footer-text">Investigación basada en fuentes académicas sobre arte contemporáneo latinoamericano.
+        </p>
+        <button class="btn-primary open-modal" data-modal="modal-referencias">Ver Referencias Consultadas</button>
+    </footer>
+
+
+    <!-- ================= MODALES (CONTENIDO PROFUNDO) ================= -->
+
+    <!-- MODAL 1: AUTOR -->
+    <dialog id="modal-autor" class="info-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>El Autor: Oscar Muñoz</h2>
+            <h3>Orígenes y Formación</h3>
+            <p class="modal-p">Oscar Muñoz (Popayán, 1951) desarrolló su carrera indisolublemente ligada a Cali.
+                Graduado del Instituto
+                Departamental de Bellas Artes (IDBA) en 1971, se formó en un epicentro de vanguardia cultural (Ciudad
+                Solar). Su obra temprana ("Dibujos Morbosos", 1971) ya mostraba una mirada casi voyerista sobre el
+                cuerpo.</p>
+            <h3>Evolución: Del Fotorrealismo a la <span class="glosario-word"
+                    data-word="protografias">Protografía</span></h3>
+            <p class="modal-p">En los 70s, exploró la arquitectura de clases bajas con "Inquilinatos" (1976), usando
+                carboncillo para
+                capturar atmósferas fantasmales.</p>
+            <p class="modal-p">En los 80s, "Cortinas de baño" (1986) marcó el giro hacia soportes inestables, iniciando
+                su investigación
+                sobre las "<span class="glosario-word" data-word="protografias">Protografías</span>": imágenes en estado
+                germinal.</p>
+        </div>
+    </dialog>
+
+    <!-- MODAL 2: OBRA TECNICA -->
+    <dialog id="modal-obra" class="info-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>El Secreto Técnico de «Aliento»</h2>
+            <h3>Ingeniería de la Imagen</h3>
+            <p class="modal-p">Muñoz utiliza discos de acero inoxidable de 20 cm. Sobre ellos imprime fotos de
+                <span class="glosario-word" data-word="obituarios">obituarios</span> usando una
+                <strong class="modal-strong"><span class="glosario-word" data-word="serigrafía">grasa serigráfica</span>
+                    invisible</strong>.
+            </p>
+            <h3>El Fenómeno Físico</h3>
+            <ul class="detail-list modal-list">
+                <li><strong class="modal-strong">1. El Soporte:</strong> El acero frío actúa como condensador.</li>
+                <li><strong class="modal-strong">2. El Aliento:</strong> Tu exhalación contiene <span
+                        class="glosario-word" data-word="vaho">vaho</span> — vapor de agua caliente.
+                </li>
+                <li><strong class="modal-strong">3. La Química:</strong> La grasa repele el agua (hidrofobia). El vapor
+                    solo se pega en el
+                    metal limpio, revelando la imagen en "negativo".</li>
+                <li><strong class="modal-strong">4. La Muerte:</strong> Al evaporarse el agua, la imagen muere de nuevo.
+                </li>
+            </ul>
+        </div>
+    </dialog>
+
+    <!-- MODAL 3: CONTEXTO -->
+    <dialog id="modal-contexto" class="info-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Contexto: El Rostro de la Desaparición</h2>
+            <p class="modal-p">Aunque Muñoz evita a menudo una interpretación puramente política, es imposible desligar
+                <em>Aliento</em> de la
+                Colombia de los años 90.
+            </p>
+            <p class="modal-p">El país vivía el recrudecimiento del conflicto armado. La "Desaparición Forzada" era una
+                tragedia diaria.
+                Los rostros que Muñoz toma de los <span class="glosario-word" data-word="obituarios">obituarios</span>
+                son anónimos, representando a una colectividad herida.</p>
+            <p class="modal-p"><strong class="modal-strong">Justicia Simbólica:</strong> Al respirar sobre el espejo, el
+                espectador realiza un acto de
+                rescate. Le presta su vida (su aliento) a la víctima para sacarla del olvido, aunque sea por un segundo.
+            </p>
+        </div>
+    </dialog>
+
+    <!-- MODAL 4: JUSTIFICACION TEORICA -->
+    <dialog id="modal-justificacion" class="info-modal">
+        <div class="modal-content modal-wide">
+            <button class="close-modal">&times;</button>
+            <h2>15 Rasgos de la obra afines al arte contemporáneo</h2>
+
+            <ol class="checklist-15">
+                <li>
+                    <strong class="modal-strong">Hibridación de Medios</strong>
+                    <span class="modal-p">Aliento es simultáneamente serigrafía, escultura industrial, fotografía y
+                        performance. No pertenece a una sola disciplina.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Interactividad Participativa</strong>
+                    <span class="modal-p">El espectador deja de ser observador pasivo: su acción física (exhalar)
+                        completa y activa la obra.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Uso de Materiales No Convencionales</strong>
+                    <span class="modal-p">Grasa serigráfica, acero industrial y vapor de agua reemplazan el mármol y el
+                        óleo, dialogando con la vida cotidiana.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Naturaleza Efímera</strong>
+                    <span class="modal-p">La imagen dura lo que dura una exhalación. La obra cuestiona que el arte deba
+                        perdurar para siempre.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Compromiso Sociopolítico</strong>
+                    <span class="modal-p">Aborda la desaparición forzada en la Colombia de los años 90 de forma crítica
+                        y sin panfleto.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Desplazamiento del Ego</strong>
+                    <span class="modal-p">Para ver al otro, el espectador debe empañar su propio reflejo: desaparecer él
+                        mismo para que el otro aparezca.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Estética Relacional (Bourriaud)</strong>
+                    <span class="modal-p">La obra crea un espacio de interrelación entre el vivo y el muerto, no una
+                        ventana cerrada al mundo.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Pluralismo de Significados</strong>
+                    <span class="modal-p">No hay una interpretación correcta única: la obra invita al diálogo y a
+                        múltiples lecturas personales.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Ruptura de Jerarquías Culturales</strong>
+                    <span class="modal-p">Los obituarios del periódico (cultura de masas) se presentan sobre acero
+                        industrial, disolviendo la frontera entre "alta" y "baja" cultura.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Reflexividad sobre el Medio</strong>
+                    <span class="modal-p">Muñoz no usa la fotografía para representar la realidad, sino para cuestionar
+                        si la fotografía puede fijar la realidad.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Giro Sensorial y Somático</strong>
+                    <span class="modal-p">Involucra calor, humedad y proximidad física —el cuerpo es la interfaz del
+                        conocimiento artístico, no solo el intelecto.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Uso del Archivo</strong>
+                    <span class="modal-p">Los obituarios son documentos de archivo cotidiano transformados en
+                        experiencia estética de alto impacto.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Resonancia Global y Local</strong>
+                    <span class="modal-p">Nace en Cali pero resuena universalmente: la finitud y la memoria no tienen
+                        frontera cultural.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Innovación Procesual</strong>
+                    <span class="modal-p">La ciencia de materiales —repulsión agua/grasa— se convierte en vanguardia
+                        artística sin usar tecnología digital.</span>
+                </li>
+                <li>
+                    <strong class="modal-strong">Desacralización del Objeto</strong>
+                    <span class="modal-p">Los discos pueden ser tocados y alterados: la obra pierde el "no me toques"
+                        del objeto moderno e integra el hálito del espectador.</span>
+                </li>
+            </ol>
+        </div>
+    </dialog>
+
+    <!-- MODAL 5: REFERENCIAS -->
+    <dialog id="modal-referencias" class="info-modal">
+        <div class="modal-content modal-wide">
+            <button class="close-modal">&times;</button>
+            <h2>Referencias Consultadas</h2>
+            <p class="intro-p">Fuentes académicas, institucionales y de investigación utilizadas en la elaboración de
+                este trabajo.</p>
+
+            <div class="ref-group">
+                <h3>Sobre Oscar Muñoz y su Obra</h3>
+                <ul class="ref-links">
+                    <li><a href="https://www.raco.cat/index.php/mitologias/article/download/303857/393574"
+                            target="_blank" rel="noopener">Oscar Muñoz bajo el relámpago. Temporalidad latinoamericana y
+                            arte colombiano contemporáneo</a> — RACO, acceso feb. 19, 2026</li>
+                    <li><a href="https://museoamparo.com/semblanzas/a/perfil/234/oscar-munoz" target="_blank"
+                            rel="noopener">Oscar Muñoz | Semblanzas</a> — Museo Amparo, Puebla, acceso feb. 19, 2026
+                    </li>
+                    <li><a href="https://enciclopedia.banrepcultural.org/index.php?title=Oscar_Mu%C3%B1oz"
+                            target="_blank" rel="noopener">Oscar Muñoz — Enciclopedia</a> — La Red Cultural del Banco de
+                        la República, acceso feb. 19, 2026</li>
+                    <li><a href="https://www.sicardi.com/artists/oscar-munoz" target="_blank" rel="noopener">Oscar Muñoz
+                            — Artists</a> — Sicardi | Ayers | Bacino | Art Gallery, acceso feb. 19, 2026</li>
+                    <li><a href="https://www.fondationcartier.com/en/collection/artists/oscar-munoz" target="_blank"
+                            rel="noopener">Oscar Muñoz | Collection</a> — Fondation Cartier pour l'art contemporain,
+                        acceso feb. 19, 2026</li>
+                    <li><a href="https://bienaldanzacali.com/wp-content/uploads/Catalogo-6a-Bienal_WEBd.pdf"
+                            target="_blank" rel="noopener">Catálogo 6a Bienal Internacional de Danza de Cali</a>, nov.
+                        2023, acceso feb. 19, 2026</li>
+                    <li><a href="https://es.wikipedia.org/wiki/%C3%93scar_Mu%C3%B1oz_(artista)" target="_blank"
+                            rel="noopener">Óscar Muñoz (artista)</a> — Wikipedia, acceso feb. 19, 2026</li>
+                    <li><a href="https://www.redalyc.org/pdf/6141/614165081002.pdf" target="_blank" rel="noopener">Entre
+                            el aparecer y la desaparición: umbrales estéticos en la obra de Oscar Muñoz</a> — Redalyc,
+                        acceso feb. 19, 2026</li>
+                    <li><a href="http://www.scielo.org.co/scielo.php?script=sci_arttext&amp;pid=S2011-804X2022000100104"
+                            target="_blank" rel="noopener">En el baño de Óscar Muñoz: la experiencia de extrañamiento
+                            entre espejos, lavamanos y cortinas de baño</a> — SciELO, acceso feb. 19, 2026</li>
+                    <li><a href="https://www.banrepcultural.org/oscar-munoz/aliento.html" target="_blank"
+                            rel="noopener">OSCAR MUÑOZ | PROTOGRAFÍAS — Aliento</a> — Banrepcultural.org, acceso feb.
+                        19, 2026</li>
+                    <li><a href="https://blantonmuseum.org/oscar-munoz-cronologia/2000s/" target="_blank"
+                            rel="noopener">Década de 2000 — Cronología Oscar Muñoz</a> — Blanton Museum of Art, acceso
+                        feb. 19, 2026</li>
+                    <li><a href="https://centrodememoriahistorica.gov.co/trece-obras-de-arte-para-hablar-de-desaparicion-forzada/"
+                            target="_blank" rel="noopener">Trece obras de arte para hablar de desaparición forzada</a> —
+                        Centro de Memoria Histórica, acceso feb. 19, 2026</li>
+                    <li><a href="https://premionalcritica.uniandes.edu.co/wp-content/uploads/Rad-4454-Cat-1-Pensar-con-las-manos.pdf"
+                            target="_blank" rel="noopener">Pensar con las manos. Otra mirada a las relaciones entre arte
+                            y...</a>, acceso feb. 19, 2026</li>
+                    <li><a href="https://estetica.uc.cl/images/simposios/Poder_ContraPoder.pdf" target="_blank"
+                            rel="noopener">Estéticas del poder y contra el poder de la imagen en América</a>, acceso
+                        feb. 19, 2026</li>
+                    <li><a href="https://www.redalyc.org/journal/6141/614175616007/html/" target="_blank"
+                            rel="noopener">En el baño de Óscar Muñoz (versión completa)</a> — Redalyc, acceso feb. 19,
+                        2026</li>
+                </ul>
+            </div>
+
+            <div class="ref-group">
+                <h3>Arthur Danto — El Fin de la Historia del Arte</h3>
+                <ul class="ref-links">
+                    <li><a href="https://vromansbookstore.com/book/9780691163895" target="_blank" rel="noopener">After
+                            the End of Art: Contemporary Art and the Pale of History (Updated Edition)</a> — Vroman's
+                        Bookstore, acceso feb. 19, 2026</li>
+                    <li><a href="https://clarkbuckner.com/clarkbuckner/70" target="_blank" rel="noopener">The End of Art
+                            History?: Against Arthur Danto</a> — Clark Buckner, acceso feb. 19, 2026</li>
+                    <li><a href="https://blackwells.co.uk/bookshop/product/After-the-End-of-Art-by-Arthur-C-Danto/9780691163895"
+                            target="_blank" rel="noopener">After the End of Art — Arthur C. Danto</a> — Blackwell's,
+                        acceso feb. 19, 2026</li>
+                    <li><a href="https://jzmcgowan.com/2025/11/02/arthur-danto-after-the-end-of-art/" target="_blank"
+                            rel="noopener">Arthur Danto, After the End of Art</a> — McGowanBlog, acceso feb. 19, 2026
+                    </li>
+                    <li><a href="https://mariabuszek.com/mariabuszek/kcai/PoMoSeminar/Readings/DantoEndOfArtIntro.pdf"
+                            target="_blank" rel="noopener">Arthur Danto «INTRODUCTION: Modern, Postmodern, and
+                            Contemporary» — After the End of Art</a>, acceso feb. 19, 2026</li>
+                </ul>
+            </div>
+
+            <div class="ref-group">
+                <h3>Hans Belting — Antropología de la Imagen</h3>
+                <ul class="ref-links">
+                    <li><a href="https://www.goodreads.com/book/show/2761804-the-end-of-the-history-of-art"
+                            target="_blank" rel="noopener">The End of the History of Art?</a> — Goodreads, acceso feb.
+                        19, 2026</li>
+                    <li><a href="https://garagemca.org/en/programs/publishing/hans-belting-art-history-after-modernism"
+                            target="_blank" rel="noopener">Hans Belting. Art History After Modernism</a> — Garage,
+                        acceso feb. 19, 2026</li>
+                    <li><a href="https://www.scribd.com/doc/125893490/Hans-Belting-The-End-of-the-History-of-Art-1982"
+                            target="_blank" rel="noopener">Hans Belting — The End of The History of Art (1982)</a> —
+                        Scribd, acceso feb. 19, 2026</li>
+                    <li><a href="https://arte.udp.cl/cms/wp-content/uploads/2022/10/La-visualidad-de-las-imagenes.pdf"
+                            target="_blank" rel="noopener">La visualidad de las imágenes</a> — Arte UDP, acceso feb. 19,
+                        2026</li>
+                </ul>
+            </div>
+
+            <div class="ref-group">
+                <h3>Terry Smith — Arte Contemporáneo y Temporalidad</h3>
+                <ul class="ref-links">
+                    <li><a href="https://www.researchgate.net/publication/351580467_What_is_Contemporary_Art"
+                            target="_blank" rel="noopener">What is Contemporary Art?</a> — ResearchGate, acceso feb. 19,
+                        2026</li>
+                    <li><a href="https://www.terryesmith.net/web/?page_id=2" target="_blank" rel="noopener">Books —
+                            Terry Smith</a> — terryesmith.net, acceso feb. 19, 2026</li>
+                </ul>
+            </div>
+
+            <div class="ref-group">
+                <h3>Arte Contemporáneo — Marco Teórico General</h3>
+                <ul class="ref-links">
+                    <li><a href="https://concepto.de/arte-contemporaneo/" target="_blank" rel="noopener">Arte
+                            Contemporáneo — Concepto, características y tendencias</a>, acceso feb. 19, 2026</li>
+                    <li><a href="https://galerialarcada.com/que-es-el-arte-contemporaneo-guia-esencial/" target="_blank"
+                            rel="noopener">¿Qué es el Arte Contemporáneo? Guía Esencial</a> — Galería Larcada, acceso
+                        feb. 19, 2026</li>
+                    <li><a href="https://es.scribd.com/document/496271187/Parcial-final-Tipo-B-Daniela-Hernandez-Bernal"
+                            target="_blank" rel="noopener">Arte contemporáneo: poshistoria y ética</a> — Scribd, acceso
+                        feb. 19, 2026</li>
+                    <li><a href="https://www.unprofesor.com/ciencias-sociales/arte-contemporaneo-caracteristicas-principales-6530.html"
+                            target="_blank" rel="noopener">Arte contemporáneo: características principales</a> —
+                        unProfesor, acceso feb. 19, 2026</li>
+                    <li><a href="https://www.ifema.es/noticias/arte/origen-caracteristicas-arte-contemporaneo"
+                            target="_blank" rel="noopener">Origen y características del arte contemporáneo</a> — IFEMA
+                        MADRID, acceso feb. 19, 2026</li>
+                    <li><a href="https://psicologiaymente.com/cultura/arte-contemporaneo" target="_blank"
+                            rel="noopener">Arte contemporáneo: qué es, características, y movimientos principales</a> —
+                        Psicología y Mente, acceso feb. 19, 2026</li>
+                    <li><a href="https://www.cervantesvirtual.com/research/num-20-2008/f310cc42-3b96-45c6-b23a-5e3c54323349.pdf"
+                            target="_blank" rel="noopener">Artecontexto, arte, cultura y nuevos medios. Núm. 20,
+                            2008</a> — Biblioteca Virtual Cervantes, acceso feb. 19, 2026</li>
+                </ul>
+            </div>
+
+            <div class="ref-group">
+                <h3>Giro Sensorial y Cuerpo</h3>
+                <ul class="ref-links">
+                    <li><a href="https://tesiunamdocumentos.dgb.unam.mx/ptd2009/noviembre/0651522/0651522_A1.pdf"
+                            target="_blank" rel="noopener">Estética del vacío</a> — UNAM, acceso feb. 19, 2026</li>
+                    <li><a href="https://ru.dgb.unam.mx/server/api/core/bitstreams/eb98eef6-66aa-4f25-a1b5-42598603209b/content"
+                            target="_blank" rel="noopener">Una mirada sociológica a los desafíos y las estrategias de
+                            adaptación de sujetos con anosmia</a> — UNAM, acceso feb. 19, 2026</li>
+                    <li><a href="https://cehisunmdp.wordpress.com/wp-content/uploads/2018/04/ebookcehis-1.pdf"
+                            target="_blank" rel="noopener">Carolina, Germinario</a> — Centro de Estudios Históricos,
+                        acceso feb. 19, 2026</li>
+                    <li><a href="https://dokumen.pub/los-sentidos-del-cuerpo-el-giro-sensorial-en-la-investigacion-social-y-los-estudios-de-genero-9786073025058.html"
+                            target="_blank" rel="noopener">Los sentidos del cuerpo: el giro sensorial en la
+                            investigación social y los estudios de género</a> — DOKUMEN.PUB, acceso feb. 19, 2026</li>
+                </ul>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- MODAL GLOSARIO -->
+    <dialog id="modal-glosario" class="info-modal glosario-modal">
+        <div class="modal-content glosario-content">
+            <button class="close-modal">&times;</button>
+            <p class="glosario-tag">Glosario</p>
+            <h2 id="glosario-titulo" class="glosario-titulo"></h2>
+            <p id="glosario-def" class="glosario-def"></p>
+        </div>
+    </dialog>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
